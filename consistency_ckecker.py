@@ -1,4 +1,5 @@
 import yaml
+import math
 
 def read_yaml(file_path):
     """Read YAML file and return the data."""
@@ -17,12 +18,14 @@ simulator_model_params = read_yaml(simulator_model_param_file_path)["/**"]["ros_
 
 # compare the parameters
 results = {
-    "vehicle_model_type_consistency": mpc_params["vehicle_model_type"] == simulator_model_params["vehicle_model_type"],
-    "input_delay_difference": simulator_model_params["steer_time_delay"] - mpc_params["input_delay"],
-    "vehicle_model_steer_tau_difference": simulator_model_params["steer_time_constant"] - mpc_params["vehicle_model_steer_tau"],
-    "acceleration_limit_difference": simulator_model_params["vel_rate_lim"] - mpc_params["acceleration_limit"],
-    "max_acc_difference": simulator_model_params["vel_lim"] - pid_params["max_acc"],
-    "min_acc_difference": simulator_model_params["vel_rate_lim"] - pid_params["min_acc"]
+    "mpc_vehicle_model_type_consistency": mpc_params["vehicle_model_type"] == simulator_model_params["vehicle_model_type"],  # Should not compare directly. Modify later!!
+    "mpc_steer_delay_difference": simulator_model_params["steer_time_delay"] - mpc_params["input_delay"],
+    "mpc_steer_time_constant_difference": simulator_model_params["steer_time_constant"] - mpc_params["vehicle_model_steer_tau"],
+    "mpc_acceleration_limit_difference": simulator_model_params["vel_rate_lim"] - mpc_params["acceleration_limit"],
+    "mpc_max_steer_rate_lim_difference_by_curvature": simulator_model_params["steer_rate_lim"] - max(mpc_params["steer_rate_lim_dps_list_by_curvature"]) * (math.pi / 180),
+    "mpc_max_steer_rate_lim_difference_by_velocity": simulator_model_params["steer_rate_lim"] - max(mpc_params["steer_rate_lim_dps_list_by_velocity"]) * (math.pi / 180),
+    "pid_abs_max_acc_difference": simulator_model_params["vel_rate_lim"] - abs(pid_params["max_acc"]),
+    "pid_abs_min_acc_difference": simulator_model_params["vel_rate_lim"] - abs(pid_params["min_acc"])
 }
 
 # print the results
