@@ -7,9 +7,9 @@ def read_yaml(file_path):
         return yaml.safe_load(file)
 
 # paths to the YAML files
-mpc_param_file_path = "/home/shen/pilot-auto.x2/src/autoware/launcher/autoware_launch/config/control/trajectory_follower/lateral/mpc.param.yaml"
-pid_param_file_path = "/home/shen/pilot-auto.x2/src/autoware/launcher/autoware_launch/config/control/trajectory_follower/longitudinal/pid.param.yaml"
-simulator_model_param_file_path = "/home/shen/pilot-auto.x2/src/description/vehicle/j6_gen1_description/j6_gen1_description/config/simulator_model.param.yaml"
+mpc_param_file_path = "/home/zheshen/pilot-auto.x2/src/autoware/launcher/autoware_launch/config/control/trajectory_follower/lateral/mpc.param.yaml"
+pid_param_file_path = "/home/zheshen/pilot-auto.x2/src/autoware/launcher/autoware_launch/config/control/trajectory_follower/longitudinal/pid.param.yaml"
+simulator_model_param_file_path = "/home/zheshen/pilot-auto.x2/src/description/vehicle/j6_gen1_description/j6_gen1_description/config/simulator_model.param.yaml"
 
 # read the YAML files
 mpc_params = read_yaml(mpc_param_file_path)["/**"]["ros__parameters"]
