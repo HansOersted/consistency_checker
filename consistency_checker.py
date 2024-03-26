@@ -18,7 +18,7 @@ simulator_model_params = read_yaml(simulator_model_param_file_path)["/**"]["ros_
 
 # compare the parameters
 results = {
-    "mpc_vehicle_model_type_consistency": mpc_params["vehicle_model_type"] == simulator_model_params["vehicle_model_type"],  # Should not compare directly. Modify later!!
+#   "mpc_vehicle_model_type_consistency": mpc_params["vehicle_model_type"] == simulator_model_params["vehicle_model_type"],  # Should not compare directly. Modify later!!
     "mpc_steer_delay_difference": simulator_model_params["steer_time_delay"] - mpc_params["input_delay"],
     "mpc_steer_time_constant_difference": simulator_model_params["steer_time_constant"] - mpc_params["vehicle_model_steer_tau"],
     "mpc_acceleration_limit_difference": simulator_model_params["vel_rate_lim"] - mpc_params["acceleration_limit"],
